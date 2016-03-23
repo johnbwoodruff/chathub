@@ -1,0 +1,25 @@
+{
+  "name": "chathub",
+  "productName": "ChatHub",
+  "identifier": "net.johnbwoodruff.chathub",
+  "description": "The coolest chat experience around.",
+  "version": "0.1.0",
+  "author": "John Woodruff",
+  "copyright": "© 2016, John Woodruff",
+  "main": "background.js",
+  "dependencies": {
+    "angular": "^1.5.2",
+    "angular-animate": "^1.5.2",
+    "angular-aria": "^1.5.2",
+    "angular-material": "^1.0.6",
+    "angular-messages": "^1.5.2",
+    "angular-ui-router": "^0.2.18",
+    "angularfire": "^1.1.4",
+    "electron-json-storage": "^2.0.0",
+    "fs-jetpack": "^0.7.0",
+    "material-design-icons": "^2.2.3"
+  },
+  "devDependencies": {
+    "jshint": "^2.9.1"
+  }
+}

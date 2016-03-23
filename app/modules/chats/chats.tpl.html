@@ -1,0 +1,14 @@
+<div id="chats-component" flex="" layout="row">
+	<md-sidenav flex="" class="md-sidenav-left" md-component-id="left" md-is-locked-open="true" md-whiteframe="4">
+		<md-list>
+			<md-list-item class="user-list-item" ng-click="$ctrl.logAwesomeness()" ng-repeat="user in $root.allUsers">
+				<img src="images/default.png" class="md-avatar" />
+				<p>{{user.firstName}} {{user.lastName}}</p>
+			</md-list-item>
+		</md-list>
+		<md-button class="md-fab md-fab-bottom-right md-accent md-hue-3" aria-label="New Chat">
+			<md-icon md-font-set="material-icons">add</md-icon>
+		</md-button>
+	</md-sidenav>
+	<chats-detail></chats-detail>
+</div>

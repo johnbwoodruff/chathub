@@ -1,0 +1,67 @@
+@grey:#FAFAFA;
+@white:#FFFFFF;
+
+[ng\:cloak], [ng-cloak], .ng-cloak {
+	display: none !important;
+}
+
+html, body {
+	width: 100%;
+	height: 100%;
+	margin: 0;
+	padding: 0;
+	background-color:@grey;
+}
+
+a {
+	text-decoration: none;
+}
+
+.no-select {
+	-webkit-touch-callout: none; /* iOS Safari */
+	-webkit-user-select: none;   /* Chrome/Safari/Opera */
+	-khtml-user-select: none;    /* Konqueror */
+	-moz-user-select: none;      /* Firefox */
+	-ms-user-select: none;       /* IE/Edge */
+	user-select: none;
+	cursor: default;
+}
+
+img {
+	pointer-events: none;
+}
+
+.text-center {
+	text-align: center;
+}
+
+.larger-side-padding {
+	padding:0px 35px;
+}
+
+.user-avatar {
+	height:30px;
+	width:30px;
+	margin: 25px auto;
+	overflow: hidden;
+	border-radius:50%;
+	position: relative;
+	margin-right:10px;
+
+	img {
+		width:100%;
+	}
+}
+
+.signup-container {
+	background-color:@white;
+	width:50%;
+	height:50%;
+	min-width:400px;
+}
+
+.user-list-item {
+	img {
+		border:1px solid #cccccc;
+	}
+}

@@ -1,0 +1,32 @@
+<div id="signup-component" flex="" layout="row" layout-align="center center">
+	<div class="signup-container md-whiteframe-1dp" layout-align="center center">
+		<md-toolbar class="md-tall">
+			<span flex></span>
+			<h2 class="md-toolbar-tools md-toolbar-tools-bottom larger-side-padding">
+				<span class="md-flex md-display-1">Welcome</span>
+			</h2>
+		</md-toolbar>
+		<md-content layout-padding layout="column">
+			<form name="$ctrl.signupForm">
+				<md-input-container class="md-block">
+					<label>First Name</label>
+					<input name="firstName" required ng-model="$ctrl.user.firstName">
+					<div ng-messages="$ctrl.signupForm.firstName.$error" role="alert">
+						<div ng-message="required" class="my-message">First Name Required</div>
+					</div>
+				</md-input-container>
+				<md-input-container class="md-block">
+					<label>Last Name</label>
+					<input name="lastName" required ng-model="$ctrl.user.lastName">
+					<div ng-messages="$ctrl.signupForm.lastName.$error" role="alert">
+						<div ng-message="required" class="my-message">Last Name Required</div>
+					</div>
+				</md-input-container>
+				<div layout="row">
+					<span flex=""></span>
+					<md-button class="md-raised md-primary" ng-click="$ctrl.createUser()">Start Chatting</md-button>
+				</div>
+			</form>
+		</md-content>
+	</div>
+</div>
