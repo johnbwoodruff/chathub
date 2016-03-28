@@ -23,9 +23,32 @@
 					<img class="no-select" src="images/default.png"/>
 				</div>
 				<h3 class="no-select">
-					<!-- USERNAME HERE -->
-					<span>{{user.firstName}} {{user.lastName}}</span>
+					<span>{{$root.user.name}}</span>
 				</h3>
+				<md-menu md-position-mode="target-right target">
+					<md-button aria-label="Settings Menu" class="md-icon-button" ng-click="$root.openMenu($mdOpenMenu, $event)">
+						<!-- <md-icon md-menu-origin md-svg-icon="call:phone"></md-icon> -->
+						<md-icon md-menu-origin md-font-set="material-icons">settings</md-icon>
+					</md-button>
+					<md-menu-content width="4">
+						<md-menu-item>
+							<md-button>
+								<md-icon md-menu-align-target md-font-set="material-icons">account_circle</md-icon> Profile
+							</md-button>
+						</md-menu-item>
+						<md-menu-item>
+							<md-button>
+								<md-icon md-font-set="material-icons">settings</md-icon> Settings
+							</md-button>
+						</md-menu-item>
+						<md-menu-divider></md-menu-divider>
+						<md-menu-item>
+							<md-button ng-click="$root.logout()">
+								<md-icon md-font-set="material-icons">power_settings_new</md-icon> Logout
+							</md-button>
+						</md-menu-item>
+					</md-menu-content>
+				</md-menu>
 			</div>
 		</div>
 	</md-toolbar>

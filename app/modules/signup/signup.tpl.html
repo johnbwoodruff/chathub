@@ -9,22 +9,22 @@
 		<md-content layout-padding layout="column">
 			<form name="$ctrl.signupForm">
 				<md-input-container class="md-block">
-					<label>First Name</label>
-					<input name="firstName" required ng-model="$ctrl.user.firstName">
-					<div ng-messages="$ctrl.signupForm.firstName.$error" role="alert">
-						<div ng-message="required" class="my-message">First Name Required</div>
+					<label>Username</label>
+					<input name="username" required ng-model="$ctrl.user.username">
+					<div ng-messages="$ctrl.signupForm.username.$error" role="alert">
+						<div ng-message="required" class="my-message">Username Required</div>
 					</div>
 				</md-input-container>
 				<md-input-container class="md-block">
-					<label>Last Name</label>
-					<input name="lastName" required ng-model="$ctrl.user.lastName">
-					<div ng-messages="$ctrl.signupForm.lastName.$error" role="alert">
-						<div ng-message="required" class="my-message">Last Name Required</div>
+					<label>Name</label>
+					<input name="name" required ng-model="$ctrl.user.name">
+					<div ng-messages="$ctrl.signupForm.name.$error" role="alert">
+						<div ng-message="required" class="my-message">Name Required</div>
 					</div>
 				</md-input-container>
 				<div layout="row">
 					<span flex=""></span>
-					<md-button class="md-raised md-primary" ng-click="$ctrl.createUser()">Start Chatting</md-button>
+					<md-button class="md-raised md-primary" ng-click="$ctrl.createUser()" ng-disabled="$ctrl.signupForm.$invalid">Start Chatting</md-button>
 				</div>
 			</form>
 		</md-content>

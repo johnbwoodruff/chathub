@@ -26,6 +26,7 @@ angular.module('chathub', [
 	// 	template: '<chats-detail></chats-detail>'
 	// });
 	$urlRouterProvider.otherwise('/chats');
+	// $urlRouterProvider.otherwise('/signup');
 
 	$mdThemingProvider.theme('default')
 		.primaryPalette('blue')
@@ -37,11 +38,37 @@ angular.module('chathub', [
 	$rootScope.noUser = true;
 	$rootScope.user = {};
 
+	var originatorEv;
+	$rootScope.openMenu = function($mdOpenMenu, ev) {
+		originatorEv = ev;
+		$mdOpenMenu(ev);
+	};
+
+	$rootScope.logout = function() {
+		storage.remove('user', function(error, data) {
+			if(error) throw error;
+
+			$rootScope.user = {};
+			$rootScope.currUser = {};
+			$rootScope.noUser = true;
+			console.log('USER REMOVED LOCALLY: ', data);
+			$state.go('signup');
+		});
+	};
+
 	// Get all users.
-	var ref = new Firebase("https://chathub-app.firebaseio.com/users");
-	$rootScope.allUsers = $firebaseArray(ref);
+	var usersRef = new Firebase("https://chathub-app.firebaseio.com/users");
+	$rootScope.allUsers = $firebaseArray(usersRef);
 	$rootScope.allUsers.$loaded().then(function() {
 		console.log($rootScope.allUsers);
+	}).catch(function(err) {
+		console.log(err);
+	});
+
+	var roomsRef = new Firebase("https://chathub-app.firebaseio.com/rooms");
+	$rootScope.rooms = $firebaseArray(roomsRef);
+	$rootScope.rooms.$loaded().then(function() {
+		console.log($rootScope.rooms);
 	}).catch(function(err) {
 		console.log(err);
 	});
