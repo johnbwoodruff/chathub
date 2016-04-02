@@ -1,0 +1,38 @@
+<md-dialog aria-label="Mango (Fruit)">
+	<md-toolbar>
+		<div class="md-toolbar-tools">
+			<h2>Create Room</h2>
+			<span flex></span>
+			<md-button class="md-icon-button" ng-click="cancel()">
+				<md-icon md-font-set="material-icons">close</md-icon>
+			</md-button>
+		</div>
+	</md-toolbar>
+	<md-dialog-content layout-padding>
+		<p id="create-chat-description" class="md-body-1">Enter a name and topic for your room and choose whether it should be private or public.</p>
+		<form name="signupForm">
+			<md-input-container class="md-block">
+				<label>Name</label>
+				<input name="room" required ng-model="room.name">
+				<div ng-messages="signupForm.room.$error" role="alert">
+					<div ng-message="required" class="my-message">Name Required</div>
+				</div>
+			</md-input-container>
+			<md-input-container class="md-block">
+				<label>Topic</label>
+				<input name="topic" required ng-model="room.topic">
+				<div ng-messages="signupForm.topic.$error" role="alert">
+					<div ng-message="required" class="my-message">Topic Required</div>
+				</div>
+			</md-input-container>
+			<md-radio-group ng-model="room.private" layout="row">
+				<md-radio-button value="0" class="md-hue-3">Public</md-radio-button>
+				<md-radio-button value="1" class="md-hue-3">Private</md-radio-button>
+			</md-radio-group>
+		</form>
+	</md-dialog-content>
+	<md-dialog-actions layout="row">
+		<md-button ng-click="cancel()">Cancel</md-button>
+		<md-button ng-click="createRoom()">Create Room</md-button>
+	</md-dialog-actions>
+</md-dialog>

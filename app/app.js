@@ -7,6 +7,8 @@ angular.module('chathub', [
 	'ui.router',
 	'firebase',
 	'chathub.signup',
+	'chathub.users-service',
+	'chathub.chats-service',
 	'chathub.chats',
 	'chathub.chats-detail'
 ])
@@ -32,7 +34,7 @@ angular.module('chathub', [
 		.primaryPalette('blue')
 		.accentPalette('deep-orange');
 }])
-.run(['$rootScope', '$state', '$firebaseArray', function($rootScope, $state, $firebaseArray) {
+.run(['$rootScope', '$state', '$firebaseArray', 'chatsService', 'usersService', function($rootScope, $state, $firebaseArray, Chats, Users) {
 	$rootScope.appEnv = env.name;
 	$rootScope.osPlatform = os.platform();
 	$rootScope.noUser = true;
@@ -57,16 +59,14 @@ angular.module('chathub', [
 	};
 
 	// Get all users.
-	var usersRef = new Firebase("https://chathub-app.firebaseio.com/users");
-	$rootScope.allUsers = $firebaseArray(usersRef);
+	$rootScope.allUsers = Users.getUsers();
 	$rootScope.allUsers.$loaded().then(function() {
 		console.log($rootScope.allUsers);
 	}).catch(function(err) {
 		console.log(err);
 	});
 
-	var roomsRef = new Firebase("https://chathub-app.firebaseio.com/rooms");
-	$rootScope.rooms = $firebaseArray(roomsRef);
+	$rootScope.rooms = Chats.getRooms();
 	$rootScope.rooms.$loaded().then(function() {
 		console.log($rootScope.rooms);
 	}).catch(function(err) {

@@ -1,42 +1,24 @@
-const storage = require('electron-json-storage');
-
-function signupController($state, $rootScope, $firebaseObject, $mdToast) {
+function signupController($state, $rootScope, $mdToast, Users) {
 	var ctrl = this;
 
-	function userAlreadyExistsToast() {
+	function showToast(message) {
 		$mdToast.show(
 			$mdToast.simple()
-			.textContent('Username already taken')
+			.textContent(message)
 			.position('top right')
 			.hideDelay(3000)
 		);
 	}
 
 	ctrl.createUser = function() {
-		var userRef = new Firebase("https://chathub-app.firebaseio.com/users/" + ctrl.user.username);
-		$rootScope.currUser = $firebaseObject(userRef);
-		$rootScope.currUser.$loaded().then(function() {
-			// Check if current user exists.
-			console.log($rootScope.currUser);
-			if($rootScope.currUser.name) {
-				// Username Already Exists
-				userAlreadyExistsToast();
-				return;
-			}
-			// User doesn't exist, go ahead and create.
-			$rootScope.currUser.name = ctrl.user.name;
-			$rootScope.currUser.$save().then(function() {
-				// Add to local storage
-				storage.set('user', ctrl.user, function(error) {
-					if (error) throw error;
-
-					$rootScope.user = ctrl.user;
-					$rootScope.noUser = false;
-					$state.go('chats');
-				});
-			});
-		}).catch(function(err) {
-			console.log(err);
+		var promise = Users.createUser(ctrl.user);
+		promise.then(function(message) {
+			showToast(message);
+			$rootScope.user = ctrl.user;
+			$rootScope.noUser = false;
+			$state.go('chats');
+		}, function(reason) {
+			showToast(reason);
 		});
 	};
 
@@ -53,6 +35,6 @@ function signupController($state, $rootScope, $firebaseObject, $mdToast) {
 angular.module('chathub.signup')
 .component('signup', {
 	templateUrl:'modules/signup/signup.tpl.html',
-	controller:['$state', '$rootScope', '$firebaseObject', '$mdToast', signupController],
+	controller:['$state', '$rootScope', '$mdToast', 'usersService', signupController],
 	bindings:{}
 });

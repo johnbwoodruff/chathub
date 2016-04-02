@@ -28,7 +28,7 @@
 				<md-menu md-position-mode="target-right target">
 					<md-button aria-label="Settings Menu" class="md-icon-button" ng-click="$root.openMenu($mdOpenMenu, $event)">
 						<!-- <md-icon md-menu-origin md-svg-icon="call:phone"></md-icon> -->
-						<md-icon md-menu-origin md-font-set="material-icons">settings</md-icon>
+						<md-icon md-menu-origin md-font-set="material-icons">more_vert</md-icon>
 					</md-button>
 					<md-menu-content width="4">
 						<md-menu-item>
@@ -55,10 +55,6 @@
 
 	<div ui-view flex="" layout="column"></div>
 
-	<!--<md-button class="md-fab md-fab-bottom-right md-accent md-hue-3" aria-label="New Chat">
-		<md-icon md-font-set="material-icons">add</md-icon>
-	</md-button>-->
-
 	<!-- ALL THE JS -->
 	<script src="vendor/electron_boilerplate/context_menu.js"></script>
 	<script src="vendor/electron_boilerplate/external_links.js"></script>
@@ -79,5 +75,9 @@
 	<script src="modules/chats/chats.component.js"></script>
 	<script src="modules/chats-detail/chats-detail.module.js"></script>
 	<script src="modules/chats-detail/chats-detail.component.js"></script>
+	<script src="modules/chats-service/chats-service.module.js"></script>
+	<script src="modules/chats-service/chats-service.service.js"></script>
+	<script src="modules/users-service/users-service.module.js"></script>
+	<script src="modules/users-service/users-service.service.js"></script>
 </body>
 </html>
