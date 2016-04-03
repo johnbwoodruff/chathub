@@ -2,7 +2,7 @@ function createChatController($scope, $mdDialog, chatsService) {
 	$scope.hide = function() {
 		$mdDialog.hide();
 	};
-	
+
 	$scope.cancel = function() {
 		$mdDialog.cancel();
 	};
@@ -11,7 +11,6 @@ function createChatController($scope, $mdDialog, chatsService) {
 		// Create Room
 		var promise = chatsService.createRoom($scope.room);
 		promise.then(function(message) {
-			console.log(message);
 			$mdDialog.hide(message);
 		}, function(reason) {
 			console.log(reason);
@@ -29,7 +28,7 @@ function createChatController($scope, $mdDialog, chatsService) {
 	setup();
 }
 
-function chatsController($firebaseArray, $mdDialog, $mdToast) {
+function chatsController($firebaseArray, $mdDialog, $mdToast, $state) {
 	var ctrl = this;
 
 	function showToast(message) {
@@ -55,6 +54,10 @@ function chatsController($firebaseArray, $mdDialog, $mdToast) {
 		});
 	};
 
+	ctrl.openRoom = function(id) {
+		$state.go('chats.detail',{id:id});
+	};
+
 	function setup() {
 		ctrl.helloWorld = 'Hello World!';
 	}
@@ -65,6 +68,6 @@ function chatsController($firebaseArray, $mdDialog, $mdToast) {
 angular.module('chathub.chats')
 .component('chats', {
 	templateUrl:'modules/chats/chats.tpl.html',
-	controller:['$firebaseArray', '$mdDialog', '$mdToast', chatsController],
+	controller:['$firebaseArray', '$mdDialog', '$mdToast', '$state', chatsController],
 	bindings:{}
 });

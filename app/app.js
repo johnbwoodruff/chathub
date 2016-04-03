@@ -22,11 +22,11 @@ angular.module('chathub', [
 	.state('chats', {
 		url: '/chats',
 		template: '<chats flex="" layout="column"></chats>'
+	})
+	.state('chats.detail', {
+		url: '/detail/:id',
+		template: '<chats-detail flex="" layout="column"></chats-detail>'
 	});
-	// .state('chats.detail', {
-	// 	url: '/detail/:id',
-	// 	template: '<chats-detail></chats-detail>'
-	// });
 	$urlRouterProvider.otherwise('/chats');
 	// $urlRouterProvider.otherwise('/signup');
 
@@ -53,7 +53,6 @@ angular.module('chathub', [
 			$rootScope.user = {};
 			$rootScope.currUser = {};
 			$rootScope.noUser = true;
-			console.log('USER REMOVED LOCALLY: ', data);
 			$state.go('signup');
 		});
 	};
@@ -61,14 +60,14 @@ angular.module('chathub', [
 	// Get all users.
 	$rootScope.allUsers = Users.getUsers();
 	$rootScope.allUsers.$loaded().then(function() {
-		console.log($rootScope.allUsers);
+		// Potentially do something here with the users.
 	}).catch(function(err) {
 		console.log(err);
 	});
 
 	$rootScope.rooms = Chats.getRooms();
 	$rootScope.rooms.$loaded().then(function() {
-		console.log($rootScope.rooms);
+		// Potentially do something here with the rooms.
 	}).catch(function(err) {
 		console.log(err);
 	});
@@ -84,7 +83,6 @@ angular.module('chathub', [
 					throw error;
 				}
 
-				console.log(data);
 				$rootScope.user = data;
 				$rootScope.noUser = false;
 			});

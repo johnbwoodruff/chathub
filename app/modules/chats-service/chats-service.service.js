@@ -1,4 +1,5 @@
 function chatsService($firebaseArray, $firebaseObject, $q) {
+	// Generates a "UUID", doesn't quite meet every single requirement, but is really close.
 	function uuid() {
 		function s4() {
 			return Math.floor((1 + Math.random()) * 0x10000)
@@ -17,6 +18,7 @@ function chatsService($firebaseArray, $firebaseObject, $q) {
 	function createRoom(room) {
 		var deferred = $q.defer();
 		room.private = parseInt(room.private);
+		// Create new room with random UUID
 		var roomRef = new Firebase("https://chathub-app.firebaseio.com/rooms/" + uuid());
 		var currRoom = $firebaseObject(roomRef);
 		// Set values
@@ -24,15 +26,20 @@ function chatsService($firebaseArray, $firebaseObject, $q) {
 		currRoom.topic = room.topic;
 		currRoom.private = room.private;
 		currRoom.$save().then(function() {
-			console.log(currRoom);
 			deferred.resolve('Room successfully created');
 		});
 		return deferred.promise;
 	}
 
+	function getMessages(roomId) {
+		var messagesRef = new Firebase("https://chathub-app.firebaseio.com/messages/" + roomId);
+		return $firebaseArray(messagesRef);
+	}
+
 	return {
 		getRooms: getRooms,
-		createRoom: createRoom
+		createRoom: createRoom,
+		getMessages: getMessages
 	};
 }
 

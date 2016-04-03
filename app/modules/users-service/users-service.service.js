@@ -9,12 +9,10 @@ function usersService($firebaseArray, $firebaseObject, $rootScope, $q) {
 
 	function createUser(user) {
 		var deferred = $q.defer();
-		console.log(user);
 		var userRef = new Firebase("https://chathub-app.firebaseio.com/users/" + user.username);
 		var currUser = $firebaseObject(userRef);
 		currUser.$loaded().then(function() {
 			// Check if current user exists.
-			console.log(currUser);
 			if(currUser.name) {
 				// Username Already Exists
 				deferred.reject('Username already taken');
@@ -34,8 +32,7 @@ function usersService($firebaseArray, $firebaseObject, $rootScope, $q) {
 					});
 				});
 			}
-		}).catch(function(err) {
-			console.log(err);
+		}).catch(function() {
 			deferred.reject('Error loading from Firebase');
 		});
 		return deferred.promise;

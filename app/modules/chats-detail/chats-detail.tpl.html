@@ -1,3 +1,22 @@
-<div id="chats-detail-component">
-	In Progress...
+<div id="chats-detail-component" flex="" layout="column">
+	<div ng-show="$ctrl.messages.length===0">
+		<p class="md-headline text-center">It's lonely here...</p>
+	</div>
+	<div ng-show="$ctrl.messages.length!==0">
+		<md-list>
+			<md-list-item ng-repeat="message in $ctrl.messages" class="md-2-line">
+				<img class="no-select md-avatar avatar-outline" src="images/default.png"/>
+				<div class="md-list-item-text">
+					<h3>{{message.author}} - <span class="md-caption">{{message.timestamp | date:'MMM-d h:mm a'}}</span></h3>
+					<p class="md-body-1">{{message.message}}</p>
+				</div>
+				<md-divider></md-divider>
+			</md-list-item>
+		</md-list>
+	</div>
+	<div flex=""></div>
+	<md-divider></md-divider>
+	<div flex="none" layout="row">
+		<input type="text" class="chat-input-box" flex="" ng-model="$ctrl.chatBox" ng-keypress="$ctrl.addMessage($event)"/>
+	</div>
 </div>

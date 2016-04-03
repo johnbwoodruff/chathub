@@ -60,12 +60,19 @@ img {
 	min-width:400px;
 }
 
-.user-list-item {
-	img {
-		border:1px solid #cccccc;
-	}
+.avatar-outline {
+	border:1px solid #cccccc;
 }
 
 #create-chat-description {
 	margin:0;
+}
+
+.chat-input-box {
+	border:0;
+	padding:10px 10px;
+
+	&:active, &:focus {
+		outline:0;
+	}
 }
