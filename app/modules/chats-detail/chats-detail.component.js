@@ -15,6 +15,11 @@ function chatsDetailController(Chats, $stateParams, $rootScope) {
 		}
 	};
 
+	$rootScope.$on('rooms-loaded', function() {
+		ctrl.room = $rootScope.rooms.$getRecord($stateParams.id);
+		console.log(ctrl.room);
+	});
+
 	function setup() {
 		ctrl.roomId = $stateParams.id;
 		ctrl.messages = Chats.getMessages(ctrl.roomId);

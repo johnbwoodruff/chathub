@@ -28,7 +28,6 @@ angular.module('chathub', [
 		template: '<chats-detail flex="" layout="column"></chats-detail>'
 	});
 	$urlRouterProvider.otherwise('/chats');
-	// $urlRouterProvider.otherwise('/signup');
 
 	$mdThemingProvider.theme('default')
 		.primaryPalette('blue')
@@ -47,7 +46,7 @@ angular.module('chathub', [
 	};
 
 	$rootScope.logout = function() {
-		storage.remove('user', function(error, data) {
+		storage.remove('user', function(error) {
 			if(error) throw error;
 
 			$rootScope.user = {};
@@ -57,17 +56,9 @@ angular.module('chathub', [
 		});
 	};
 
-	// Get all users.
-	$rootScope.allUsers = Users.getUsers();
-	$rootScope.allUsers.$loaded().then(function() {
-		// Potentially do something here with the users.
-	}).catch(function(err) {
-		console.log(err);
-	});
-
 	$rootScope.rooms = Chats.getRooms();
 	$rootScope.rooms.$loaded().then(function() {
-		// Potentially do something here with the rooms.
+		$rootScope.$broadcast('rooms-loaded');
 	}).catch(function(err) {
 		console.log(err);
 	});
@@ -85,6 +76,17 @@ angular.module('chathub', [
 
 				$rootScope.user = data;
 				$rootScope.noUser = false;
+
+				// Get all users.
+				$rootScope.allUsers = Users.getUsers();
+				$rootScope.allUsers.$loaded().then(function() {
+					// Potentially do something here with the users.
+					if(!$rootScope.allUsers.$getRecord($rootScope.user.username)) {
+						$rootScope.logout();
+					}
+				}).catch(function(err) {
+					console.log(err);
+				});
 			});
 		}
 		else {

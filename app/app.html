@@ -10,8 +10,8 @@
 	<!-- App CSS -->
 	<link href="./stylesheets/main.css" rel="stylesheet" type="text/css">
 </head>
-<body ng-app="chathub" ng-cloak layout="column">
-	<md-toolbar>
+<body ng-app="chathub" ng-cloak layout="column" flex="">
+	<md-toolbar flex="none">
 		<div class="md-toolbar-tools">
 			<h2 class="no-select">
 				<md-icon md-font-set="material-icons">forum</md-icon>
@@ -53,7 +53,7 @@
 		</div>
 	</md-toolbar>
 
-	<div ui-view flex="" layout="column"></div>
+	<div ui-view flex="" layout="row"></div>
 
 	<!-- ALL THE JS -->
 	<script src="vendor/electron_boilerplate/context_menu.js"></script>
